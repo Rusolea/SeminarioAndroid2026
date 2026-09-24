@@ -22,7 +22,6 @@ import ar.edu.unicen.seminarioandroid2026.ddl.domain.model.Movie
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.ui.semantics.error
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
