@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SeminarioAndroid2026</string>
+    <string name="no_movies_found">No se encontraron películas</string>
+    <string name="retry">Reintentar</string>
+    <string name="error_unknown">Ocurrió un error inesperado</string>
+    <string name="error_no_internet">Sin conexión a internet. Verifica tu red e intenta nuevamente.</string>
+    <string name="error_server">Ocurrió un error al cargar las películas. Intenta más tarde.</string>
+    <string name="search_hint">Buscar película...</string>
+    <string name="no_search_results">No se encontraron películas para tu búsqueda</string>
+    <string name="clear_search">Limpiar búsqueda</string>
+</resources>

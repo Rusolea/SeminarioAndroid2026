@@ -1,0 +1,51 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+
+
+gitignore
+# Archivos de compilación de Android y Gradle
+.gradle/
+build/
+/*/build/
+
+# Configuración local (¡MUY IMPORTANTE! Aquí está tu API Key)
+local.properties
+
+# Archivos de Android Studio e IntelliJ IDEA
+.idea/
+
+.cxx/
+externalNativeBuild/
+.navigation/
+
+# Archivos de sistema operativo
+*.DS_Store
+Thumbs.db
+
+# Archivos de captura de pantalla y logs
+captures/
+*.log
+
+# Archivos de firmas (Keystores)
+*.jks
+*.keystore
+
+# Configuración de Google Services (si usas Firebase)
+# google-services.json
+
+# Archivos temporales de edición
+*.swp
+*~
+.stackdump
