@@ -13,6 +13,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -55,10 +57,24 @@ fun MovieDetailsScreen(
                             contentDescription = "Volver"
                         )
                     }
+                },
+                actions = {
+                    if (uiState is MovieDetailsUiState.Success) {
+                        val movie = (uiState as MovieDetailsUiState.Success).movieDetail
+                        val isFav by viewModel.isFavorite.collectAsState()
+
+                        IconButton(onClick = { viewModel.toggleWishlist(movie) }) {
+                            Icon(
+                                imageVector = if (isFav) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                                contentDescription = "Agregar o quitar de la lista de deseados",
+                                tint = if (isFav) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                    }
                 }
             )
         }
-    ) { paddingValues ->
+    )  { paddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()

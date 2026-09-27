@@ -23,4 +23,11 @@ interface MovieRepository {
     suspend fun getMovieDetails(movieId: Int): Result<MovieDetail>
 
     suspend fun searchMovies(query: String, page: Int = 1): Result<List<Movie>>
+
+    // 🟢 Persistencia Local (Room)
+    fun getWishlistMovies(): Flow<List<Movie>>
+    fun isMovieInWishlist(movieId: Int) : Flow<Boolean>
+    suspend fun addToWishlist(movieDetail: MovieDetail)
+    suspend fun removeFromWishlist(movieId: Int)
+
 }

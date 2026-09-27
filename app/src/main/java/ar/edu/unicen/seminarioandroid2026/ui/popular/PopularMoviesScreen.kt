@@ -197,7 +197,7 @@ private fun MovieGrid(
 }
 
 @Composable
-private fun MovieItem(
+fun MovieItem(
     movie: Movie,
     onClick: () -> Unit
 ) {

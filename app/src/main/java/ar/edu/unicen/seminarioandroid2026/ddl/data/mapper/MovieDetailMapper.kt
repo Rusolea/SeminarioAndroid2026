@@ -17,7 +17,20 @@ private const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
                 releaseDate = this.releaseDate ?: "N/A",
                 voteAverage = this.voteAverage,
                 runtimeFormatted = formattedRuntime,
-                genres = this.genres?.map { it.name } ?: emptyList()
+                genres = this.genres?.map { it.name } ?: emptyList(),
+                posterUrl = this.posterPath?.let { "$IMAGE_BASE_URL$it" },
+                backdropUrl = this.backdropPath?.let { "$IMAGE_BASE_URL$it" }
+
+
+
 
             )
         }
+
+
+
+
+
+
+
+

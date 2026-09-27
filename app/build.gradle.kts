@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
 
 
 }
@@ -103,6 +104,11 @@ dependencies {
     //Paginado
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.compose)
+
+    //Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
     implementation(libs.androidx.hilt.navigation.compose)
     // Testing

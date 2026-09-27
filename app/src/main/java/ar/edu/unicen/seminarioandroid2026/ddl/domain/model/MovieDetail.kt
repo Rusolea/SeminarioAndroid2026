@@ -12,6 +12,8 @@ data class MovieDetail (
     val releaseDate: String?,
     val voteAverage: Double,
     val runtimeFormatted: String,
-    val genres: List<String>
+    val genres: List<String>,
+    val posterUrl: String?,
+    val backdropUrl: String?
 
 )
