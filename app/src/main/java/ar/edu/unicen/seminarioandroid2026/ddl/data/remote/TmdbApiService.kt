@@ -26,4 +26,10 @@ interface TmdbApiService {
         @Query("query") query: String,
         @Query("page") page: Int = 1
     ) : MovieResponseDto
+
+    @GET("trending/movie/week")
+    suspend fun getTrendingMovies(
+        @Query("page") page: Int = 1
+    ): MovieResponseDto
+
 }

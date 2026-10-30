@@ -1,5 +1,6 @@
 package ar.edu.unicen.seminarioandroid2026.ui.main
 
+import TrendingMoviesScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -19,6 +20,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import ar.edu.unicen.seminarioandroid2026.ui.popular.PopularMoviesScreen
 import ar.edu.unicen.seminarioandroid2026.ui.wishlist.WishlistScreen
+
+//preview
+import androidx.compose.ui.tooling.preview.Preview
+import ar.edu.unicen.seminarioandroid2026.ui.theme.SeminarioAndroid2026Theme
 
 // ⚠️ Nota: Asegúrate de que estos imports coincidan con la ubicación real de tus pantallas
 // import ar.edu.unicen.seminarioandroid2026.ui.popular.PopularMoviesScreen
@@ -44,6 +49,13 @@ fun MainScreen(onMovieClick: (Int) -> Unit) {
                     icon = { Icon(Icons.Default.Favorite, contentDescription = null) },
                     label = { Text("Deseados") }
                 )
+                //R.string.tab\_trending
+                NavigationBarItem (
+                    selected = selectedTab == 2,
+                    onClick = { selectedTab = 2 },
+                    icon = { Icon(Icons.Default.Star, contentDescription = null) },
+                    label = { Text("Trending") }
+                )
             }
         }
     ) { paddingValues ->
@@ -51,7 +63,19 @@ fun MainScreen(onMovieClick: (Int) -> Unit) {
             when (selectedTab) {
                 0 -> PopularMoviesScreen(onMovieClick = onMovieClick)
                 1 -> WishlistScreen(onMovieClick = onMovieClick)
+                2 -> TrendingMoviesScreen(onMovieClick = onMovieClick)
             }
         }
+    }
+}
+
+
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun MainScreenPreview() {
+    SeminarioAndroid2026Theme {
+        // Pasamos una lambda vacía para el parámetro onMovieClick
+        MainScreen(onMovieClick = {})
     }
 }

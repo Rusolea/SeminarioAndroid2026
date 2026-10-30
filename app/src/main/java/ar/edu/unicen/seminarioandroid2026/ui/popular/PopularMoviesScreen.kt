@@ -176,7 +176,7 @@ private fun PagedMovieGrid(
 }
 
 @Composable
-private fun MovieGrid(
+fun MovieGrid(
     movies: List<Movie>,
     onMovieClick: (Int) -> Unit
 ) {
@@ -236,7 +236,7 @@ fun MovieItem(
 
 
 @Composable
-private fun ErrorMoviesView(
+fun ErrorMoviesView(
     message: String,
     onRetry: () -> Unit,
     modifier: Modifier = Modifier

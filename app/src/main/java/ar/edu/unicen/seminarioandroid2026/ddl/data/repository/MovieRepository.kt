@@ -30,4 +30,9 @@ interface MovieRepository {
     suspend fun addToWishlist(movieDetail: MovieDetail)
     suspend fun removeFromWishlist(movieId: Int)
 
+    //endpoint trending
+    suspend fun getTrendingMovies(page: Int = 1): Result<List<Movie>>
+
+
+
 }

@@ -73,7 +73,13 @@ class MovieRepositoryImpl @Inject constructor(
          wishlistMovieDao.deleteMovieById(movieId)
     }
 
+    override suspend fun getTrendingMovies(page: Int): Result<List<Movie>> {
+        return runCatching {
+            val response = apiService.getTrendingMovies(page)
+            response.results.map { it.toDomain() }
+        }
 
+    }
 }
 //        return try {
 //            val response = apiService.getMovieDetails(movieId)

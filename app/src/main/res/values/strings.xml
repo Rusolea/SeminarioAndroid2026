@@ -8,4 +8,6 @@
     <string name="search_hint">Buscar película...</string>
     <string name="no_search_results">No se encontraron películas para tu búsqueda</string>
     <string name="clear_search">Limpiar búsqueda</string>
+    <string name="tab_popular">Populares</string>
+    <string name="tab_trending">Tendencias</string>
 </resources>

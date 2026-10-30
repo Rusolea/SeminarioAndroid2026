@@ -10,4 +10,6 @@
     <string name="search_hint">Search movie...</string>
     <string name="no_search_results">No movies found for your search</string>
     <string name="clear_search">Clear search</string>
+    <string name="tab_popular">Popular</string>
+    <string name="tab_trending">Trending</string>
 </resources>
