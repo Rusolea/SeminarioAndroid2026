@@ -1,7 +1,9 @@
 package ar.edu.unicen.seminarioandroid2026.ui.popular.details
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -34,14 +38,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.unicen.seminarioandroid2026.R
+import ar.edu.unicen.seminarioandroid2026.ddl.domain.model.Movie
 
 import ar.edu.unicen.seminarioandroid2026.ddl.domain.model.MovieDetail
+import ar.edu.unicen.seminarioandroid2026.ui.popular.MovieItem
 import coil.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieDetailsScreen(
     onBackClick: () -> Unit,
+    onMovieClick: (Int) -> Unit,
     viewModel: MovieDetailsViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -96,7 +103,8 @@ fun MovieDetailsScreen(
                 }
 
                 is MovieDetailsUiState.Success -> {
-                    MovieDetailsContent(movie = state.movieDetail)
+                    MovieDetailsContent(state = state,
+                        onMovieClick = onMovieClick)
                 }
             }
         }
@@ -104,7 +112,38 @@ fun MovieDetailsScreen(
 }
 
 @Composable
-private fun MovieDetailsContent(movie: MovieDetail) {
+fun MovieHorizontalSection(title: String, movies: List<Movie>, onMovieClick: (Int) -> Unit) {
+    Spacer(modifier = Modifier.height(24.dp))
+    Text(
+        text = title,
+        style = MaterialTheme.typography.titleLarge,
+        color = MaterialTheme.colorScheme.secondary
+    )
+    Spacer(modifier = Modifier.height(8.dp))
+
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        contentPadding = PaddingValues(horizontal = 4.dp)
+    ) {
+        items(movies, key = { it.id }) { movie ->
+            Box(modifier = Modifier.width(130.dp)) {
+                // 🟢 Reutilizamos MovieItem (asegúrate de que sea público)
+                MovieItem(
+                    movie = movie,
+                    onClick = { onMovieClick(movie.id) }
+                )
+            }
+        }
+    }
+
+}
+
+@Composable
+private fun MovieDetailsContent(
+    state: MovieDetailsUiState.Success,
+    onMovieClick: (Int) -> Unit
+) {
+    val movie = state.movieDetail
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -154,6 +193,14 @@ private fun MovieDetailsContent(movie: MovieDetail) {
             text = movie.overview,
             style = MaterialTheme.typography.bodyLarge
         )
+        // Similar Movies
+        if (state.similarMovies.isNotEmpty()) {
+            MovieHorizontalSection(
+                title = "Películas Similares",
+                movies = state.similarMovies,
+                onMovieClick = onMovieClick
+            )
+        }
     }
 }
 
@@ -178,3 +225,4 @@ private fun ErrorDetailsView(
         }
     }
 }
+

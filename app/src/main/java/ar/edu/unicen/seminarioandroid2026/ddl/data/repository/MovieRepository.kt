@@ -33,6 +33,9 @@ interface MovieRepository {
     //endpoint trending
     suspend fun getTrendingMovies(page: Int = 1): Result<List<Movie>>
 
+    //endpoint similar y recomendados
+    suspend fun getSimilarMovies(movieId: Int, page: Int = 1): Result<List<Movie>>
+    suspend fun getRecommendations(movieId: Int, page: Int = 1): Result<List<Movie>>
 
 
 }

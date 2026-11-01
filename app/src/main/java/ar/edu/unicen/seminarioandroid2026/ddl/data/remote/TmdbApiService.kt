@@ -32,4 +32,18 @@ interface TmdbApiService {
         @Query("page") page: Int = 1
     ): MovieResponseDto
 
+    //punto f recomendaciones y peliculas similares
+    @GET("movie/{movie_id}/similar")
+    suspend fun getSimilarMovies(
+        @Path("movie_id") movieId: Int,
+        @Query("page") page: Int = 1
+    ): MovieResponseDto
+
+    //recommendations
+    @GET("movie/{movie_id}/recommendations")
+    suspend fun getRecommendations(
+        @Path("movie_id") movieId: Int,
+        @Query("page") page: Int = 1
+    ): MovieResponseDto
+
 }

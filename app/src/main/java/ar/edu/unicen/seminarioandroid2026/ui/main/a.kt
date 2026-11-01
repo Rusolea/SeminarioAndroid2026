@@ -79,3 +79,4 @@ fun MainScreenPreview() {
         MainScreen(onMovieClick = {})
     }
 }
+

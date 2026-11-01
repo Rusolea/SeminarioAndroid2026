@@ -80,6 +80,22 @@ class MovieRepositoryImpl @Inject constructor(
         }
 
     }
+
+    override suspend fun getSimilarMovies(movieId: Int, page: Int): Result<List<Movie>> {
+        return runCatching {
+            val response = apiService.getSimilarMovies(movieId)
+            response.results.map { dto -> dto.toDomain() }
+        }
+    }
+
+        override suspend fun getRecommendations(movieId: Int, page: Int): Result<List<Movie>> {
+            return runCatching {
+                val response = apiService.getRecommendations(movieId)
+                response.results.map { dto -> dto.toDomain() }
+            }
+        }
+
+
 }
 //        return try {
 //            val response = apiService.getMovieDetails(movieId)

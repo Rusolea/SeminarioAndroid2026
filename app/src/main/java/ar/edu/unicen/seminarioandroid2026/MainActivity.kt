@@ -54,7 +54,11 @@ class MainActivity : ComponentActivity() {
                             )
                         ) {
                             MovieDetailsScreen(
-                                onBackClick = { navController.popBackStack() }
+                                onBackClick = { navController.popBackStack() },
+                                onMovieClick = { newMovieId ->
+                                    // Esto permite navegar de una película a otra similar
+                                    navController.navigate("details/$newMovieId")
+                                }
                             )
                         }
                     }

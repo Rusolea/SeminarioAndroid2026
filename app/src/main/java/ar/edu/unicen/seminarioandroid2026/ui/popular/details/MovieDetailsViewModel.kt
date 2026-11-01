@@ -4,8 +4,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ar.edu.unicen.seminarioandroid2026.ddl.domain.model.Movie
 import ar.edu.unicen.seminarioandroid2026.ddl.domain.model.MovieDetail
 import ar.edu.unicen.seminarioandroid2026.ddl.domain.usecase.GetMovieDetailsUseCase
+import ar.edu.unicen.seminarioandroid2026.ddl.domain.usecase.GetRecommendedMoviesUseCase
+import ar.edu.unicen.seminarioandroid2026.ddl.domain.usecase.GetSimilarMoviesUseCase
 import ar.edu.unicen.seminarioandroid2026.ddl.domain.usecase.ToggleWishlistUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,10 +18,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.jvm.optionals.getOrDefault
+
 
 @HiltViewModel
 class MovieDetailsViewModel @Inject constructor(
     private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
+    private val getSimilarMoviesUseCase: GetSimilarMoviesUseCase,
+    private val getRecommendedMoviesUseCase: GetRecommendedMoviesUseCase,
     private val toggleWishlistUseCase: ToggleWishlistUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -45,9 +52,18 @@ class MovieDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = MovieDetailsUiState.Loading
 
+            //agregamos similares y recomendados
+            val similarResult = getSimilarMoviesUseCase(movieId)
+            val recommendedResult = getRecommendedMoviesUseCase(movieId)
+
             getMovieDetailsUseCase(movieId)
                 .onSuccess { detail ->
-                    _uiState.value = MovieDetailsUiState.Success(detail)
+                    _uiState.value = MovieDetailsUiState.Success(
+                        movieDetail = detail,
+                        similarMovies = similarResult.getOrDefault(emptyList()),
+                        recommendedMovies = recommendedResult.getOrDefault(emptyList())
+
+                    )
                 }
                 .onFailure { error ->
                     val errorMessage = when (error) {
