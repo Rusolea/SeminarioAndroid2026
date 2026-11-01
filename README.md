@@ -47,3 +47,8 @@ Para compilar y ejecutar la aplicación localmente, es necesario configurar las 
 properties TMDB_API_KEY="TU_BEARER_ TOKEN_ AQUI" 
 
 4. Sincroniza el proyecto con Gradle y ejecuta la aplicación en un emulador o dispositivo físico con Android 8.0 (API 26) o superior.
+
+## Capturas de Pantalla
+|      Listado de Películas       |        Detalle de Película        |
+|:-------------------------------:|:---------------------------------:|
+| ![Listado](screenshots/img.png) | ![Detalle](screenshots/img_1.png) |
