@@ -1,5 +1,6 @@
 package ar.edu.unicen.seminarioandroid2026.ui.popular
 
+import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -22,6 +23,7 @@ import ar.edu.unicen.seminarioandroid2026.ddl.domain.model.Movie
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -180,8 +182,20 @@ fun MovieGrid(
     movies: List<Movie>,
     onMovieClick: (Int) -> Unit
 ) {
+
+    ////  1\. Obtenemos la configuración actual del dispositivo
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+    //2\. Definimos las columnas según la orientación:
+    // Vertical (Portrait): 1 columna (una debajo de otra)
+    // Horizontal (Landscape): 2 columnas
+    val columns = if(isLandscape) GridCells.Fixed(2) else GridCells.Fixed(1)
+
+
+
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 140.dp),
+        columns = columns,
         contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
