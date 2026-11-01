@@ -1,7 +1,6 @@
 package ar.edu.unicen.seminarioandroid2026.ddl.domain.model
 
-import ar.edu.unicen.seminarioandroid2026.ddl.data.remote.dto.GenreDto
-import com.google.gson.annotations.SerializedName
+
 
 data class MovieDetail (
     val id: Int,
@@ -14,6 +13,7 @@ data class MovieDetail (
     val runtimeFormatted: String,
     val genres: List<String>,
     val posterUrl: String?,
-    val backdropUrl: String?
+    val backdropUrl: String?,
+    val homepage: String?
 
 )

@@ -38,7 +38,10 @@ class MovieDetailDto (
     @SerializedName("runtime")
     val runtime: Int?,
     @SerializedName("genres")
-    val genres: List<GenreDto>
+    val genres: List<GenreDto>,
+
+    val homepage: String?
+
 )
 
 data class GenreDto(

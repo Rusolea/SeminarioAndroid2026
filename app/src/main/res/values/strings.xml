@@ -10,4 +10,9 @@
     <string name="clear_search">Limpiar búsqueda</string>
     <string name="tab_popular">Populares</string>
     <string name="tab_trending">Tendencias</string>
+    <string name="share_movie">Compartir película</string>
+    <string name="share_chooser_title">Compartir película vía</string>
+    <string name="share_message_format">¡Te recomiendo esta película!\n\n* %1$s *\n\n%2$s</string>
+    <string name="open_homepage">Página web oficial</string>
+    <string name="error_no_browser">No se encontró un navegador web para abrir el enlace.</string>
 </resources>

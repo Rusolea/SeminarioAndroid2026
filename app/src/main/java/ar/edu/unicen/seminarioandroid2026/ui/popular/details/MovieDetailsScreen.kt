@@ -1,5 +1,8 @@
 package ar.edu.unicen.seminarioandroid2026.ui.popular.details
 
+import android.content.Context
+import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +21,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -25,6 +29,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -34,15 +39,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.unicen.seminarioandroid2026.R
 import ar.edu.unicen.seminarioandroid2026.ddl.domain.model.Movie
 
-import ar.edu.unicen.seminarioandroid2026.ddl.domain.model.MovieDetail
+
 import ar.edu.unicen.seminarioandroid2026.ui.popular.MovieItem
+import ar.edu.unicen.seminarioandroid2026.ui.utils.IntentUtils
 import coil.compose.AsyncImage
+import kotlin.text.isNullOrBlank
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -103,8 +113,20 @@ fun MovieDetailsScreen(
                 }
 
                 is MovieDetailsUiState.Success -> {
+                    val context = LocalContext.current
                     MovieDetailsContent(state = state,
-                        onMovieClick = onMovieClick)
+                        onMovieClick = onMovieClick,
+                        onShareClick = {
+                            IntentUtils.shareMovie(
+                                context = context,
+                                title = state.movieDetail.title,
+                                overview = state.movieDetail.overview
+                            )
+                        },
+                        onHomepageClick = { url -> // 🟢 Agregamos 'url ->' para recibir el parámetro
+                            IntentUtils.openHomepage(context, url)
+                        }
+                        )
                 }
             }
         }
@@ -141,7 +163,9 @@ fun MovieHorizontalSection(title: String, movies: List<Movie>, onMovieClick: (In
 @Composable
 private fun MovieDetailsContent(
     state: MovieDetailsUiState.Success,
-    onMovieClick: (Int) -> Unit
+    onMovieClick: (Int) -> Unit,
+    onShareClick: () -> Unit,
+    onHomepageClick: (String) -> Unit
 ) {
     val movie = state.movieDetail
     Column(
@@ -182,8 +206,36 @@ private fun MovieDetailsContent(
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.primary
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
         }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Button(
+                onClick = onShareClick,
+                modifier = Modifier.weight(1f)
+            ) {
+                Icon(Icons.Default.Share, contentDescription = null)
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(text = stringResource(id = R.string.share_movie))
+            }
+
+            if (!movie.homepage.isNullOrBlank()) {
+                OutlinedButton(
+                    onClick = { onHomepageClick(movie.homepage) },
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Icon(Icons.Default.Share, contentDescription = null)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(text = stringResource(id = R.string.open_homepage))
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+
         Text(
             text = "Sinopsis",
             style = MaterialTheme.typography.titleLarge
@@ -236,4 +288,6 @@ private fun ErrorDetailsView(
         }
     }
 }
+
+
 

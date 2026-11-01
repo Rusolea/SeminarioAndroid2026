@@ -21,5 +21,7 @@ fun MovieDto.toDomain(): Movie {
         backdropUrl = this.backdropPath?.let { "https://image.tmdb.org/t/p/w500$it" },
         releaseDate = this.releaseDate ?: "Fecha desconocida",
         voteAverage = this.voteAverage
+
     )
 }
+

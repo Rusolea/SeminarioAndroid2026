@@ -86,6 +86,7 @@ dependencies {
     implementation(libs.okhttp.logging)
     //hilt y kapt
     implementation(libs.hilt.android)
+    implementation(libs.annotations)
     kapt(libs.hilt.compiler)
     implementation(platform(libs.androidx.compose.bom))
     // Librerías base de Compose

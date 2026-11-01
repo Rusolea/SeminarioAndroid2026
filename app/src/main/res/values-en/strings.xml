@@ -12,4 +12,9 @@
     <string name="clear_search">Clear search</string>
     <string name="tab_popular">Popular</string>
     <string name="tab_trending">Trending</string>
+    <string name="share_movie">Share movie</string>
+    <string name="share_chooser_title">Share movie via</string>
+    <string name="share_message_format">I recommend this movie!\n\n* %1$s *\n\n%2$s</string>
+    <string name="open_homepage">Official Homepage</string>
+    <string name="error_no_browser">No web browser found to open the link.</string>
 </resources>
