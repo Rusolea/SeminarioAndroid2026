@@ -201,6 +201,17 @@ private fun MovieDetailsContent(
                 onMovieClick = onMovieClick
             )
         }
+
+        // Recommended Movies
+        if (state.recommendedMovies.isNotEmpty()) {
+            MovieHorizontalSection(
+                title = "Películas Recomendadas",
+                movies = state.recommendedMovies,
+                onMovieClick = onMovieClick
+            )
+
+        }
+
     }
 }
 
